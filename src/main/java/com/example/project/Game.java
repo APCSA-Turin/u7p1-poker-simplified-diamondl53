@@ -1,6 +1,8 @@
 package com.example.project;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import org.w3c.dom.CDATASection;
 
 public class Game{
     public static String determineWinner(Player p1, Player p2,String p1Hand, String p2Hand,ArrayList<Card> communityCards){
@@ -37,9 +39,44 @@ public class Game{
     }
 
     public static void play(){ //simulate card playing
+        Deck deck = new Deck();
+        deck.initializeDeck();
+        deck.shuffleDeck();
+
+        Player p1 = new Player();
+        Player p2 = new Player();
+        p1.addCard(deck.drawCard());
+        p1.addCard(deck.drawCard());
+        p2.addCard(deck.drawCard());
+        p2.addCard(deck.drawCard());
+
+        ArrayList<Card> community = new ArrayList<>();
+        community.add(deck.drawCard());
+        community.add(deck.drawCard());
+        community.add(deck.drawCard());
+
+        System.out.println("Community Cards: \n" + community);
+        System.out.println("Player 1: \n" + p1.getHand());
+        System.out.println("Player 2: \n" + p2.getHand());
+
+        System.out.println(determineWinner(p1, p2, p1.playHand(community), p2.playHand(community), community));
+        
+
         
     }
         
-        
-
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Welcome to Poker. Press Enter to play.");
+        scan.nextLine();
+        while(true){
+            play();
+            System.out.println("Do you want to play again?(n for no)");
+            String input = scan.nextLine();
+            if(input.equals("n")){
+                break;
+            }
+        }
+        scan.close();
+    }
 }

@@ -27,13 +27,11 @@ public class Deck{
         Collections.shuffle(cards);//uses the .shuffle method to shuffle the card
     }
 
-    public  Card drawCard(){
-       Card returnCard;
+    public Card drawCard(){
        if(cards.get(0)!=null){
-        returnCard = cards.get(0);
-        return returnCard;
+        return cards.remove(0);
        }
-        return new Card("","");
+        return null;
     }
 
     public  boolean isEmpty(){
